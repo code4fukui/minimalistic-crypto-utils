@@ -1,7 +1,5 @@
-'use strict';
-
-const assert = require('assert');
-const utils = require('../');
+import { describe, it, assert } from "https://code4fukui.github.io/describe/describe.js";
+import utils from '../lib/utils.js';
 
 describe('utils', () => {
   it('should convert to array', () => {
