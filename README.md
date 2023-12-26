@@ -8,7 +8,7 @@ crypto module.
 ## Usage
 
 ```js
-const utils = require('minimalistic-crypto-utils');
+import utils from "https://code4fukui.github.io/minimalistic-crypto-utils/lib/utils.js"
 
 utils.toArray('abcd', 'hex');
 utils.encode([ 1, 2, 3, 4 ], 'hex');
