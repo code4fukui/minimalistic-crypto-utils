@@ -19,4 +19,4 @@ utils.toHex([ 1, 2, 3, 4 ]);
 
 ## License
 
-See [LICENSE](LICENSE) for details.
+MIT License — see [LICENSE](LICENSE).
