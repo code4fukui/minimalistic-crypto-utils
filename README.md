@@ -1,47 +1,67 @@
 # minimalistic-crypto-utils
-[![Build Status](https://secure.travis-ci.org/indutny/minimalistic-crypto-utils.svg)](http://travis-ci.org/indutny/minimalistic-crypto-utils)
-[![NPM version](https://badge.fury.io/js/minimalistic-crypto-utils.svg)](http://badge.fury.io/js/minimalistic-crypto-utils)
 
-Very minimal utils that are required in order to write reasonable JS-only
-crypto module.
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
+
+[
+![Build Status](https://secure.travis-ci.org/indutny/minimalistic-crypto-utils.svg)
+](http://travis-ci.org/indutny/minimalistic-crypto-utils)
+[
+![NPM version](https://badge.fury.io/js/minimalistic-crypto-utils.svg)
+](http://badge.fury.io/js/minimalistic-crypto-utils)
+
+Minimalistic tools for JS crypto modules.
+
+## Install
+
+```bash
+npm install minimalistic-crypto-utils
+```
 
 ## Usage
 
 ```js
-import utils from "https://code4fukui.github.io/minimalistic-crypto-utils/lib/utils.js"
+// ESM / Deno / Browser
+import utils from 'https://code4fukui.github.io/minimalistic-crypto-utils/lib/utils.js';
 
-utils.toArray('abcd', 'hex');
-utils.encode([ 1, 2, 3, 4 ], 'hex');
-utils.toHex([ 1, 2, 3, 4 ]);
+// Convert a hex string to a byte array
+const bytes = utils.toArray('deadbeef', 'hex');
+// => [ 222, 173, 190, 239 ]
+
+// Convert a byte array to a hex string
+const hexString = utils.toHex([ 1, 10, 100, 255 ]);
+// => '010a64ff'
+
+// `encode` is a convenience wrapper for `toHex`
+const encoded = utils.encode([ 1, 10, 100, 255 ], 'hex');
+// => '010a64ff'
 ```
 
-#### LICENSE
+## API
 
-This software is licensed under the MIT License.
+### `utils.toArray(msg, [encoding])`
 
-Copyright Fedor Indutny, 2017.
+Converts a message `msg` into an array of bytes.
 
-Permission is hereby granted, free of charge, to any person obtaining a
-copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to permit
-persons to whom the Software is furnished to do so, subject to the
-following conditions:
+*   `msg` `<String | Array | Buffer>`: The input message. If already an array, a copy is returned.
+*   `encoding` `<String>`: Optional encoding.
+    *   If `'hex'`, the input string is treated as hexadecimal.
+    *   If not provided, the string is converted to bytes based on character codes. Note: This is **not** UTF-8 encoding; multi-byte characters are split into high and low bytes.
 
-The above copyright notice and this permission notice shall be included
-in all copies or substantial portions of the Software.
+### `utils.toHex(arr)`
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-USE OR OTHER DEALINGS IN THE SOFTWARE.
+Converts an array of bytes `arr` into a hexadecimal string.
 
-[0]: http://tools.ietf.org/html/rfc6979
-[1]: https://github.com/indutny/bn.js
-[2]: https://github.com/indutny/hash.js
-[3]: https://github.com/bitchan/eccrypto
-[4]: https://github.com/wanderer/secp256k1-node
+*   `arr` `<Array>`: The byte array to convert.
+
+### `utils.encode(arr, [encoding])`
+
+A convenience wrapper for encoding an array.
+
+*   `arr` `<Array>`: The input byte array.
+*   `encoding` `<String>`: Optional encoding.
+    *   If `'hex'`, it converts the array to a hex string using `utils.toHex(arr)`.
+    *   If any other value, it returns the input array unmodified.
+
+## License
+
+[MIT](LICENSE) © 2017 Fedor Indutny
